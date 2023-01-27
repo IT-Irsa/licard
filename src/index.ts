@@ -69,6 +69,28 @@ class LicardAPI {
             return Promise.reject(error);
         }
     }
+
+    public async blockCard(contractId: number): Promise<APIResponse> {
+        try {
+            const { data } = await this._instance.post("/blockCard", {
+                contractId,
+            });
+            return Promise.resolve(data.blockCardRs);
+        } catch (error) {
+            return Promise.reject(error);
+        }
+    }
+
+    public async unblockCard(contractId: number): Promise<APIResponse> {
+        try {
+            const { data } = await this._instance.post("/unblockCard", {
+                contractId,
+            });
+            return Promise.resolve(data.unblockCardRs);
+        } catch (error) {
+            return Promise.reject(error);
+        }
+    }
 }
 
 export default LicardAPI;
