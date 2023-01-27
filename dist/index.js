@@ -27,13 +27,76 @@ class LicardAPI {
         });
     }
     /**
-     * Получение данных о балансе по контракту
+     * Получение информации по договору.
+     * @param contractId Идентификатор договора
      */
-    getContractBalance() {
+    getContractInfo(contractId) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                const { data } = yield this._instance.post("/getContractBalance");
+                const { data } = yield this._instance.post("/getContractInfo", {
+                    contractId,
+                });
+                return Promise.resolve(data.getContractInfoRs);
+            }
+            catch (error) {
+                return Promise.reject(error);
+            }
+        });
+    }
+    /**
+     * Получение данных о балансе по договору
+     * @param contractId Идентификатор договора/карты
+     */
+    getContractBalance(contractId) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const { data } = yield this._instance.post("/getContractBalance", {
+                    contractId,
+                });
                 return Promise.resolve(data.getContractBalanceRs);
+            }
+            catch (error) {
+                return Promise.reject(error);
+            }
+        });
+    }
+    /**
+     * Получение идентификатора карты/контракта по номеру
+     * @param contractNumber Номер карты/контракта
+     */
+    getContractIdByNumber(contractNumber) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const { data } = yield this._instance.post("/getContractIdByNumber", {
+                    contractNumber,
+                });
+                return Promise.resolve(data.getContractIdByNumberRs);
+            }
+            catch (error) {
+                return Promise.reject(error);
+            }
+        });
+    }
+    blockCard(contractId) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const { data } = yield this._instance.post("/blockCard", {
+                    contractId,
+                });
+                return Promise.resolve(data.blockCardRs);
+            }
+            catch (error) {
+                return Promise.reject(error);
+            }
+        });
+    }
+    unblockCard(contractId) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const { data } = yield this._instance.post("/unblockCard", {
+                    contractId,
+                });
+                return Promise.resolve(data.unblockCardRs);
             }
             catch (error) {
                 return Promise.reject(error);
