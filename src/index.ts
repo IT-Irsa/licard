@@ -15,14 +15,56 @@ class LicardAPI {
     });
 
     /**
-     * Получение данных о балансе по контракту
+     * Получение информации по договору.
+     * @param contractId Идентификатор договора
      */
-    public async getContractBalance(): Promise<GetContractBalanceResponse> {
+    public async getContractInfo(
+        contractId: number
+    ): Promise<APIResponse & { getContractInfoPayload: ContractInfo }> {
+        try {
+            const { data } = await this._instance.post("/getContractInfo", {
+                contractId,
+            });
+            return Promise.resolve(data.getContractInfoRs);
+        } catch (error) {
+            return Promise.reject(error);
+        }
+    }
+
+    /**
+     * Получение данных о балансе по договору
+     * @param contractId Идентификатор договора/карты
+     */
+    public async getContractBalance(
+        contractId: number
+    ): Promise<APIResponse & { getContractBalancePayload: BalancePayload[] }> {
         try {
             const { data } = await this._instance.post("/getContractBalance", {
-                contactId: this._options.contractId,
+                contractId,
             });
             return Promise.resolve(data.getContractBalanceRs);
+        } catch (error) {
+            return Promise.reject(error);
+        }
+    }
+
+    /**
+     * Получение идентификатора карты/контракта по номеру
+     * @param contractNumber Номер карты/контракта
+     */
+    public async getContractIdByNumber(
+        contractNumber: string
+    ): Promise<
+        APIResponse & { getContractIdByNumberPayload: { contractId: number } }
+    > {
+        try {
+            const { data } = await this._instance.post(
+                "/getContractIdByNumber",
+                {
+                    contractNumber,
+                }
+            );
+            return Promise.resolve(data.getContractIdByNumberRs);
         } catch (error) {
             return Promise.reject(error);
         }
@@ -36,8 +78,6 @@ export type APIOptions = {
     key: string | Buffer | (string | Buffer | PxfObject)[];
     /** Пароль от ключа */
     pass: string;
-    /** ID контракта Ликард */
-    contractId: string;
 };
 
 export type BalancePayload = {
@@ -52,11 +92,74 @@ export type BalancePayload = {
     balanceCurr: string;
 };
 
-export type GetContractBalanceResponse = {
+export type ContractInfo = {
+    /** Идентификатор клиента */
+    clientId: number;
+    /** Короткое имя клиента */
+    clientShortName: string;
+    /** Номер договора */
+    contractNumber: string;
+    /**
+     * Дата вступления контракта в силу
+     *
+     * Имеет формат "YYYY-MM-DD"
+     */
+    openDate: string;
+    /**
+     * Дата окончания договора
+     *
+     * Имеет формат "YYYY-MM-DD"
+     */
+    closeDate: string;
+    /** Текущий баланс договора */
+    amountAvailable: number;
+    /** Суммарный баланс по картам договора */
+    totalBalance: number;
+    /** Расход литров за предыдущий месяц */
+    volumePrev: number;
+    /** Расход литров за текущий месяц */
+    volume: number;
+    /** Кредитный лимит */
+    creditLimit: number;
+    /** Код статуса договора */
+    statusId: number;
+    /** Статус договора */
+    status: string;
+    /** Код статуса договора по потреблению */
+    discountStatusCode: string;
+    /** Значение для отображения статуса договора по потреблению */
+    discountStatus: string;
+    /** Код схемы оплаты */
+    addInfo01Code: string;
+    /** Значение для отображения схемы оплаты */
+    addInfo01: string;
+    /** Код региона заключения договора */
+    addInfo02Code: string;
+    /** Регион заключения договора */
+    addInfo02: string;
+    /** Схема определения статуса по объему потребления */
+    addInfo03Code: string;
+    /** Имя схемы определения статуса по объему потребления */
+    addInfo03: string;
+    /** Дополнительная информация.
+     *
+     * Возвращаемые данные зависят от типа договора.
+     *
+     * Возвращаемое значение не подвергается дополнительной обработке.
+     */
+    addInfo04Code: string;
+    /** Дополнительная информация.
+     *
+     * Возвращаемые данные зависят от типа договора.
+     *
+     * Возвращаемое значение не подвергается дополнительной обработке
+     */
+    addInfo04: string;
+};
+
+export type APIResponse = {
     /** Код ответа */
     resultCode: number;
     /** Сообщение от сервера */
     resultMessage: string;
-    /** Массив информации по балансам */
-    getContractBalancePayload: BalancePayload[];
 };
