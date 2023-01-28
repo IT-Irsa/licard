@@ -13,7 +13,7 @@ npm i -S @it-irsa/licard
 ## Простой пример
 
 ```ts
-import LicardAPI from "@tk-irsa/licard";
+import LicardAPI from "@it-irsa/licard";
 import fs from "fs";
 
 const api = new LicardAPI({
