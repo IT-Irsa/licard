@@ -25,7 +25,18 @@ class LicardAPI {
             const { data } = await this._instance.post("/getContractInfo", {
                 contractId,
             });
-            return Promise.resolve(data.getContractInfoRs);
+            const response = data.getContractInfoRs;
+
+            if (response.getContractInfoPayload.openDate)
+                response.getContractInfoPayload.openDate = new Date(
+                    response.getContractInfoPayload.openDate
+                );
+            if (response.getContractInfoPayload.closeDate)
+                response.getContractInfoPayload.closeDate = new Date(
+                    response.getContractInfoPayload.closeDate
+                );
+
+            return Promise.resolve(response);
         } catch (error) {
             return Promise.reject(error);
         }
@@ -121,18 +132,10 @@ export type ContractInfo = {
     clientShortName: string;
     /** Номер договора */
     contractNumber: string;
-    /**
-     * Дата вступления контракта в силу
-     *
-     * Имеет формат "YYYY-MM-DD"
-     */
-    openDate: string;
-    /**
-     * Дата окончания договора
-     *
-     * Имеет формат "YYYY-MM-DD"
-     */
-    closeDate: string;
+    /** Дата вступления контракта в силу */
+    openDate: Date;
+    /** Дата окончания договора */
+    closeDate: Date;
     /** Текущий баланс договора */
     amountAvailable: number;
     /** Суммарный баланс по картам договора */
