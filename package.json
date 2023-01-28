@@ -1,6 +1,6 @@
 {
     "name": "@tk-irsa/licard",
-    "version": "1.0.3",
+    "version": "1.0.4",
     "description": "Open-source lib for Licard API",
     "main": "dist/index.js",
     "scripts": {
