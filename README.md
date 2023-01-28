@@ -7,7 +7,7 @@
 ## Установка
 
 ```
-npm i -S @tk-irsa/licard
+npm i -S @it-irsa/licard
 ```
 
 ## Простой пример
