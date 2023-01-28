@@ -1,5 +1,5 @@
 {
-    "name": "@tk-irsa/licard",
+    "name": "@it-irsa/licard",
     "version": "1.0.4",
     "description": "Open-source lib for Licard API",
     "main": "dist/index.js",
@@ -8,7 +8,7 @@
     },
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/TK-Irsa/licard.git"
+        "url": "git+https://github.com/IT-Irsa/licard.git"
     },
     "keywords": [
         "Licard",
@@ -24,9 +24,9 @@
     "author": "Fenion",
     "license": "GPL-3.0",
     "bugs": {
-        "url": "https://github.com/TK-Irsa/licard/issues"
+        "url": "https://github.com/IT-Irsa/licard/issues"
     },
-    "homepage": "https://github.com/TK-Irsa/licard#readme",
+    "homepage": "https://github.com/IT-Irsa/licard#readme",
     "devDependencies": {
         "@types/node": "^18.11.18",
         "typescript": "^4.9.4"
