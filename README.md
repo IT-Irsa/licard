@@ -24,7 +24,7 @@ const api = new LicardAPI({
 const getBalance = async () => await api.getContractBalance(1111111);
 ```
 
-Описания всех доступных методов вы найдёте в нашем [вики](https://github.com/TK-Irsa/licard/wiki).
+Описания всех доступных методов вы найдёте в нашем [вики](https://github.com/IT-Irsa/licard/wiki).
 
 ## Зависимости
 
