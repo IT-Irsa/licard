@@ -1,5 +1,7 @@
 # Licard API
 
+[![NPMJS Package](https://github.com/IT-Irsa/licard/actions/workflows/npm-publish.yml/badge.svg)](https://github.com/IT-Irsa/licard/actions/workflows/npm-publish.yml)
+[![GitHub package](https://github.com/IT-Irsa/licard/actions/workflows/npm-publish-github-packages.yml/badge.svg)](https://github.com/IT-Irsa/licard/actions/workflows/npm-publish-github-packages.yml)
 <center>Библиотека для TS/JS приложений, упрощающая взаимодействие с API сервисами личного кабинета системы <a href="https://licard.ru/ru/">Ликард</a></center>
 
 ## Установка
