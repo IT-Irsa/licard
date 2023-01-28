@@ -56,18 +56,10 @@ export type ContractInfo = {
     clientShortName: string;
     /** Номер договора */
     contractNumber: string;
-    /**
-     * Дата вступления контракта в силу
-     *
-     * Имеет формат "YYYY-MM-DD"
-     */
-    openDate: string;
-    /**
-     * Дата окончания договора
-     *
-     * Имеет формат "YYYY-MM-DD"
-     */
-    closeDate: string;
+    /** Дата вступления контракта в силу */
+    openDate: Date;
+    /** Дата окончания договора */
+    closeDate: Date;
     /** Текущий баланс договора */
     amountAvailable: number;
     /** Суммарный баланс по картам договора */

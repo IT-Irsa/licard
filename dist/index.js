@@ -36,7 +36,12 @@ class LicardAPI {
                 const { data } = yield this._instance.post("/getContractInfo", {
                     contractId,
                 });
-                return Promise.resolve(data.getContractInfoRs);
+                const response = data.getContractInfoRs;
+                if (response.getContractInfoPayload.openDate)
+                    response.getContractInfoPayload.openDate = new Date(response.getContractInfoPayload.openDate);
+                if (response.getContractInfoPayload.closeDate)
+                    response.getContractInfoPayload.closeDate = new Date(response.getContractInfoPayload.closeDate);
+                return Promise.resolve(response);
             }
             catch (error) {
                 return Promise.reject(error);
