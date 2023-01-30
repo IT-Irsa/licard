@@ -10,7 +10,7 @@ declare class LicardAPI {
      * @param contractId Идентификатор договора
      */
     getContractInfo(contractId: number): Promise<APIResponse & {
-        getContractInfoPayload: ContractInfo;
+        getContractInfoPayload: [ContractInfo];
     }>;
     /**
      * Получение данных о балансе по договору
@@ -28,7 +28,15 @@ declare class LicardAPI {
             contractId: number;
         };
     }>;
+    /**
+     * Блокировка карты
+     * @param contractId Идентификатор карты
+     */
     blockCard(contractId: number): Promise<APIResponse>;
+    /**
+     * Разблокировка карты
+     * @param contractId Идентификатор карты
+     */
     unblockCard(contractId: number): Promise<APIResponse>;
 }
 export default LicardAPI;

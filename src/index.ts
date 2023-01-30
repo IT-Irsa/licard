@@ -20,20 +20,20 @@ class LicardAPI {
      */
     public async getContractInfo(
         contractId: number
-    ): Promise<APIResponse & { getContractInfoPayload: ContractInfo }> {
+    ): Promise<APIResponse & { getContractInfoPayload: [ContractInfo] }> {
         try {
             const { data } = await this._instance.post("/getContractInfo", {
                 contractId,
             });
             const response = data.getContractInfoRs;
 
-            if (response.getContractInfoPayload.openDate)
-                response.getContractInfoPayload.openDate = new Date(
-                    response.getContractInfoPayload.openDate
+            if (response.getContractInfoPayload[0].openDate)
+                response.getContractInfoPayload[0].openDate = new Date(
+                    response.getContractInfoPayload[0].openDate
                 );
-            if (response.getContractInfoPayload.closeDate)
-                response.getContractInfoPayload.closeDate = new Date(
-                    response.getContractInfoPayload.closeDate
+            if (response.getContractInfoPayload[0].closeDate)
+                response.getContractInfoPayload[0].closeDate = new Date(
+                    response.getContractInfoPayload[0].closeDate
                 );
 
             return Promise.resolve(response);
@@ -81,6 +81,10 @@ class LicardAPI {
         }
     }
 
+    /**
+     * Блокировка карты
+     * @param contractId Идентификатор карты
+     */
     public async blockCard(contractId: number): Promise<APIResponse> {
         try {
             const { data } = await this._instance.post("/blockCard", {
@@ -92,6 +96,10 @@ class LicardAPI {
         }
     }
 
+    /**
+     * Разблокировка карты
+     * @param contractId Идентификатор карты
+     */
     public async unblockCard(contractId: number): Promise<APIResponse> {
         try {
             const { data } = await this._instance.post("/unblockCard", {
